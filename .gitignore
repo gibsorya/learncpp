@@ -10,6 +10,9 @@
 *.out
 *.app
 
+# CMake
+build/
+
 # Debug files
 *.dSYM/
 *.su
