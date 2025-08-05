@@ -11,11 +11,25 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Find OpenGL
 find_package(OpenGL REQUIRED)
 
+# Platform-specific GLFW handling
+if(WIN32)
+    # Windows: Use static library (.a file)
+    set(GLFW_LIBRARY ${CMAKE_SOURCE_DIR}/external/lib/libglfw3.a)
+    include_directories(${CMAKE_SOURCE_DIR}/external/include/GLFW)
+elseif(APPLE)
+    # macOS: Use dynamic library (.dylib file)
+    set(GLFW_LIBRARY ${CMAKE_SOURCE_DIR}/external/lib/libglfw.3.dylib)
+    include_directories(${CMAKE_SOURCE_DIR}/external/include/GLFW)
+else()
+    # Linux: Use dynamic library
+    set(GLFW_LIBRARY ${CMAKE_SOURCE_DIR}/external/lib/libglfw.3.so)
+    include_directories(${CMAKE_SOURCE_DIR}/external/include/GLFW)
+endif()
+
 # Set include directories
 include_directories(
     ${CMAKE_SOURCE_DIR}/external/include
     ${CMAKE_SOURCE_DIR}/external/include/glad
-    ${CMAKE_SOURCE_DIR}/external/include/GLFW
     ${CMAKE_SOURCE_DIR}/external/include/KHR
 )
 
@@ -25,32 +39,37 @@ link_directories(${CMAKE_SOURCE_DIR}/external/lib)
 # Add source files
 set(SOURCES
     src/glad.c
-    # Add your source files here, for example:
     src/main.cpp
-    # src/shader.cpp
-    # etc.
 )
 
 # Create executable
 add_executable(${PROJECT_NAME} ${SOURCES})
 
 # Link libraries
-target_link_libraries(${PROJECT_NAME}
-    OpenGL::GL
-    glfw3
-    # Add other libraries as needed
-)
-
-# Platform-specific settings
 if(WIN32)
-    # Windows-specific settings
-    target_link_libraries(${PROJECT_NAME} opengl32)
+    # Windows-specific linking
+    target_link_libraries(${PROJECT_NAME}
+        OpenGL::GL
+        glfw3
+        opengl32
+    )
 elseif(APPLE)
-    # macOS-specific settings
-    target_link_libraries(${PROJECT_NAME} "-framework OpenGL" "-framework Cocoa" "-framework IOKit" "-framework CoreVideo")
+    # macOS-specific linking
+    target_link_libraries(${PROJECT_NAME}
+        OpenGL::GL
+        ${GLFW_LIBRARY}
+        "-framework OpenGL" 
+        "-framework Cocoa" 
+        "-framework IOKit" 
+        "-framework CoreVideo"
+    )
 else()
-    # Linux-specific settings
-    target_link_libraries(${PROJECT_NAME} GL X11 Xrandr Xinerama Xi Xxf86vm Xcursor)
+    # Linux-specific linking
+    target_link_libraries(${PROJECT_NAME}
+        OpenGL::GL
+        ${GLFW_LIBRARY}
+        GL X11 Xrandr Xinerama Xi Xxf86vm Xcursor
+    )
 endif()
 
 # Set output directory
