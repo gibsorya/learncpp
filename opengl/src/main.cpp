@@ -21,6 +21,12 @@ int main() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    
+    // macOS specific hints
+    #ifdef __APPLE__
+        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
+        glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
+    #endif
 
     // Window creation
     GLFWwindow* window = glfwCreateWindow(800, 800, "LearnOpenGL", NULL, NULL);
@@ -35,6 +41,9 @@ int main() {
 
     gladLoadGL();
 
+    // Enable multisampling for anti-aliasing
+    glEnable(GL_MULTISAMPLE);
+
     // Buffers:
     /*
     - Front buffer: The buffer that is displayed on the screen.
@@ -43,6 +52,7 @@ int main() {
     - Swap the front and back buffers to display the frame.
     */
 
+    // Set viewport after GLAD is loaded
     glViewport(0, 0, 800, 800);
 
 	// Create Vertex Shader Object and get its reference
@@ -99,11 +109,6 @@ int main() {
 	// Bind both the VBO and VAO to 0 so that we don't accidentally modify the VAO and VBO we created
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
-
-    glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glfwSwapBuffers(window);
-
 
 	// Main while loop
 	while (!glfwWindowShouldClose(window))
