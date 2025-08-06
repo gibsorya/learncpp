@@ -80,18 +80,15 @@ int main() {
 
 	GLfloat vertices[] =
 	{
-		-0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f, // Lower left corner
-		0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f, // Lower right corner
-		0.0f, 0.5f * float(sqrt(3)) * 2 / 3, 0.0f, // Upper corner
-        -0.5f / 2, 0.5f * float(sqrt(3)) / 6, 0.0f, // Inner left
-        0.5f / 2, 0.5f * float(sqrt(3)) / 6, 0.0f, // Inner right
-        0.0f, -0.5f * float(sqrt(3)) / 3, 0.0f // Inner down
+		-0.5f, -0.5f, 0.0f,
+        -0.5f, 0.5f, 0.0f,
+        0.5f, 0.5f, 0.0f,
+        0.5f, -0.5f, 0.0f
 	};
 
     GLuint indices[] = {
-        0, 3, 5, // First Triangle
-        3, 2, 4, // Second Triangle
-        5, 4,1, // Third Triangle
+        0, 1, 2, // First Triangle
+        2, 3, 0, // Second Triangle
     };
 
     // Create reference containers for the Vartex Array Object and the Vertex Buffer Object
@@ -133,7 +130,7 @@ int main() {
 		// Bind the VAO so OpenGL knows to use it
 		glBindVertexArray(VAO);
 		// Draw the triangles using the GL_TRIANGLES primitive
-		glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		// Swap the back buffer with the front buffer
 		glfwSwapBuffers(window);
 		// Take care of all GLFW events
