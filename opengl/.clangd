@@ -1,0 +1,11 @@
+CompileFlags:
+  Add: 
+    - -I/Users/ryangibson/dev/learncpp/opengl/include
+    - -I/Users/ryangibson/dev/learncpp/opengl/external/include
+    - -I/Users/ryangibson/dev/learncpp/opengl/external/include/glad
+    - -I/Users/ryangibson/dev/learncpp/opengl/external/include/KHR
+    - -I/Users/ryangibson/dev/learncpp/opengl/external/include/GLFW
+  Remove: []
+
+Index:
+  Background: Build
