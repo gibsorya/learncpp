@@ -33,6 +33,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/external/include
     ${CMAKE_SOURCE_DIR}/external/include/glad
     ${CMAKE_SOURCE_DIR}/external/include/KHR
+    ${CMAKE_SOURCE_DIR}/external/include/stb
 )
 
 # Set library directories
@@ -45,6 +46,7 @@ set(SOURCES
     src/VAO.cpp
     src/VBO.cpp
     src/shaderClass.cpp
+    src/stb.cpp
 )
 
 # Add header files to the target (this helps with IDE support)
