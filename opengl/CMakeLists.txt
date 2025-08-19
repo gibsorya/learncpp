@@ -47,6 +47,7 @@ set(SOURCES
     src/VBO.cpp
     src/shaderClass.cpp
     src/stb.cpp
+    src/textureClass.cpp
 )
 
 # Add header files to the target (this helps with IDE support)
@@ -55,6 +56,7 @@ set(HEADERS
     include/VBO.h
     include/EBO.h
     include/VAO.h
+    include/textureClass.h
 )
 
 # Create executable
