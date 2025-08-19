@@ -34,6 +34,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/external/include/glad
     ${CMAKE_SOURCE_DIR}/external/include/KHR
     ${CMAKE_SOURCE_DIR}/external/include/stb
+    ${CMAKE_SOURCE_DIR}/external/include/glm
 )
 
 # Set library directories
