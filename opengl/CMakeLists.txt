@@ -49,6 +49,7 @@ set(SOURCES
     src/shaderClass.cpp
     src/stb.cpp
     src/textureClass.cpp
+    src/camera.cpp
 )
 
 # Add header files to the target (this helps with IDE support)
@@ -58,6 +59,7 @@ set(HEADERS
     include/EBO.h
     include/VAO.h
     include/textureClass.h
+    include/camera.h
 )
 
 # Create executable
